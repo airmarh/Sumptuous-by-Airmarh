@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaFacebook, FaInstagram, FaReddit, FaTwitter, FaYoutube } from "react-icons/fa";
+import { backendUrl } from '../App';
 
 const ReservationForm = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,26 @@ const ReservationForm = () => {
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.post(`${backendUrl}/api/reservation/create`, formData)
+      toast.success("Reservation successful")
+
+      setFormData({
+        name:"",
+        email:"",
+        phone:"",
+        date:"",
+        time:"",
+        guests:"1"
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const timeSlot = () => {
     const slots = [];
     for(let hour = 9; hour < 21; hour++){
