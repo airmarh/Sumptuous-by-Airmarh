@@ -13,13 +13,6 @@ export const backendUrl = 'http://localhost:4000'
 const App = () => {
   return (
     <div>
-      {/* <ToastContainer />
-      <Navbar/>
-      <Routes>
-        <Route path='/' element={<Homepage/>} />
-      </Routes>
-      <Footer /> */}
-
       <ToastContainer />
       <Hero/>
       <Services/>
