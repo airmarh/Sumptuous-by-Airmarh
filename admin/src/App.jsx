@@ -4,6 +4,7 @@ import Sidebar from './Components/Sidebar'
 import AddMenu from './pages/AddMenu'
 import ListMenu from './pages/ListMenu'
 import AdminTable from './pages/AdminTable'
+import Dashboard from './pages/Dashboard'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
@@ -26,6 +27,7 @@ const App = () => {
               <Sidebar setToken={setToken}/>
               <div className='w-[70%] ml-[max(5vw, 25px)] my-8 text-black text-base flex-1 px-10 py-8'>
                 <Routes>
+                  <Route path='/' element={<Dashboard token={token} />} />
                   <Route path='/add' element={<AddMenu token={token}/>} />
                   <Route path='/list' element={<ListMenu token={token}/>} />
                   <Route path='/table' element={<AdminTable token={token}/>} />

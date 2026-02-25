@@ -17,6 +17,27 @@ export const createReservation = async(req, res) => {
     }
 }
 
+export const updateReservation = async (req, res) => {
+    try {
+        const { name, email, phone, date, time, guests } = req.body
+        const updateData = { name, email, phone, date, time, guests }
+
+        const reservation = await reservationModel.findByIdAndUpdate(
+            req.params.id,
+            updateData,
+            { new: true }
+        )
+
+        if (!reservation)
+            return res.json({ success: false, message: 'Reservation not found' })
+
+        res.json({ success: true, message: 'Reservation updated successfully', reservation })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: "Cannot update reservation" })
+    }
+}
+
 export const getAllReservations = async(req, res) => {
     try{
         const reservations = await reservationModel.find({})

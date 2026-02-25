@@ -43,7 +43,7 @@ export const getAllProducts = async(req, res) => {
 export const removeProduct = async(req, res) => {
     try{
         if(!req.body._id){
-            return res.status(400).json({success:false, message: "Reservation id is required"})
+            return res.status(400).json({success:false, message: "Product id is required"})
         }
         await productModel.findByIdAndDelete(req.body._id);
         res.json({success:true, message: "Product removed"})
@@ -57,12 +57,34 @@ export const removeProduct = async(req, res) => {
 export const getProduct = async(req, res) => {
     try{
         if(!req.body._id){
-            return res.status(400).json({success:false, message: "Reservation id is required"})
+            return res.status(400).json({success:false, message: "Product id is required"})
         }
         const product = await productModel.findById(req.body._id);
         res.json({success:true, message: "Product retrieved", product: product})
     }catch(error){
         console.log(error)
         res.status(500).json({success:false, message: "Cannot get product information"})
+    }
+}
+
+export const updateProduct = async (req, res) => {
+    try {
+        const { name, description, price, category } = req.body
+        const updateData = { name, description, price, category }
+        if (req.file) updateData.image = req.file.path
+
+        const product = await productModel.findByIdAndUpdate(
+            req.params.id,
+            updateData,
+            { new: true }
+        )
+
+        if (!product)
+            return res.json({ success: false, message: 'Product not found' })
+
+        res.json({ success: true, message: 'Product updated successfully', product })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: "Cannot update product" })
     }
 }
