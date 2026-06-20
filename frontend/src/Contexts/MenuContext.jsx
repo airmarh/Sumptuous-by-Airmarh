@@ -1,13 +1,12 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import {product} from "../assets/assets";
-import { backendUrl } from "../App";
-import axios from 'axios'
-import { toast } from 'react-toastify'
 
 export const MenuContext = createContext()
 
 const MenuContextProvider = ({children}) => {
     const [products, setProducts] = useState(product) 
+<<<<<<< Updated upstream
+=======
     
     const getProductData = async () => {
         try {
@@ -18,7 +17,8 @@ const MenuContextProvider = ({children}) => {
                 toast.error(response.data.message)
             }
         } catch (error) {
-            
+            console.error('Failed to load menu:', error)
+            toast.error('Could not load menu. Please try again later.')
         }
     }
 
@@ -26,6 +26,7 @@ const MenuContextProvider = ({children}) => {
         getProductData()
     },[])
 
+>>>>>>> Stashed changes
     return(
         <MenuContext.Provider value={{products}}> {children} </MenuContext.Provider>
     )

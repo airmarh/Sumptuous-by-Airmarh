@@ -5,8 +5,11 @@ import { toast } from 'react-toastify'
 import { MdDeleteForever, MdEdit } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 
+const PAGE_SIZE = 8
+
 const ListMenu = ({ token }) => {
   const [list, setList] = useState([])
+  const [page, setPage] = useState(1)
   const navigate = useNavigate()
 
   const fetchList = async () => {
@@ -29,11 +32,14 @@ const ListMenu = ({ token }) => {
 
   useEffect(() => { fetchList() }, [])
 
+  const totalPages = Math.ceil(list.length / PAGE_SIZE)
+  const paginated = list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
   return (
     <div className="min-h-screen bg-amber-50 p-8 flex justify-center">
       <div className="w-full max-w-6xl">
 
-=        <div className="mb-8">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-800">Menu Management</h1>
           <p className="text-slate-500 mt-1">Manage, edit and organize your menu items</p>
         </div>
@@ -52,7 +58,7 @@ const ListMenu = ({ token }) => {
             <div className="p-10 text-center text-slate-400">No menu items found.</div>
           )}
 
-          {list.map(item => (
+          {paginated.map(item => (
             <div
               key={item._id}
               className="grid grid-cols-[90px_2fr_1.5fr_1fr_120px] items-center px-6 py-4 border-b last:border-none hover:bg-amber-50/40 transition"
@@ -92,6 +98,32 @@ const ListMenu = ({ token }) => {
           ))}
 
         </div>
+
+        {totalPages > 1 && (
+          <div className='flex justify-center items-center gap-2 mt-6'>
+            <button
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className='px-3 py-1 rounded border text-sm disabled:opacity-40 hover:bg-amber-50'>
+              Previous
+            </button>
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i + 1)}
+                className={`px-3 py-1 rounded border text-sm ${page === i + 1 ? 'bg-amber-400 text-white border-amber-400' : 'hover:bg-amber-50'}`}>
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+              className='px-3 py-1 rounded border text-sm disabled:opacity-40 hover:bg-amber-50'>
+              Next
+            </button>
+          </div>
+        )}
+
       </div>
     </div>
   )

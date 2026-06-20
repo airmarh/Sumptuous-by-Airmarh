@@ -10,9 +10,10 @@ import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
-export const backendUrl = 'http://localhost:4000'
+export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
+
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token' || ''))
+  const [token, setToken] = useState(localStorage.getItem('token') || '')
   
   useEffect(() => {
     localStorage.setItem('token', token)

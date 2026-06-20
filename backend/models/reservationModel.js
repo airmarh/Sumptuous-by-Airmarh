@@ -6,7 +6,9 @@ const reservationSchema = new mongoose.Schema({
     phone: {type:String, required:true},
     date: {type:String, required:true},
     time: {type:String, required:true},
-    guests: {type:String, required:true},
+    guests: {type:Number, required:true},
+    status: {type:String, enum: ['confirmed', 'cancelled', 'no_show'], default: 'confirmed'},
+    reminderSent: {type:Boolean, default: false},
 })
 
 export default mongoose.model('Reservation', reservationSchema)

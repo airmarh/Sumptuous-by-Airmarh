@@ -40,9 +40,11 @@ const Dashboard = ({ token }) => {
         .filter(res => res.date?.split("T")[0] === today)
         .reduce((total, res) => total + Number(res.guests || 0), 0);
 
+      const confirmedCount = reservations.filter(r => r.status === 'confirmed').length
+
       setStats({
         products: products.length,
-        reservations: reservations.length,
+        reservations: confirmedCount,
         guestsToday: guestsToday,
       });
 
@@ -76,7 +78,7 @@ const Dashboard = ({ token }) => {
         <div className="bg-white p-8 rounded-xl shadow-md">
           <FaCalendarAlt className="text-3xl text-amber-400 mb-4" />
           <h2 className="text-3xl font-bold">{stats.reservations}</h2>
-          <p className="text-gray-500">Total Reservations</p>
+          <p className="text-gray-500">Active Reservations</p>
         </div>
 
         <div className="bg-white p-8 rounded-xl shadow-md">
@@ -94,9 +96,9 @@ const Dashboard = ({ token }) => {
           <p className="text-gray-500">No recent reservations.</p>
         ) : (
           <div className="space-y-4">
-            {recentReservations.map((res, index) => (
+            {recentReservations.map((res) => (
               <div
-                key={index}
+                key={res._id}
                 className="flex justify-between border-b pb-3"
               >
                 <span>{res.name}</span>

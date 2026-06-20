@@ -4,16 +4,16 @@ import Services from './Components/Services'
 import Menu from './Components/Menu'
 import ReservationForm from './Components/ReservationForm'
 import Footer from './Components/Footer'
+<<<<<<< Updated upstream
+=======
 import { ToastContainer } from 'react-toastify' 
 import Navbar from './Components/Navbar'
-import { Routes, Route } from 'react-router-dom'
-
-export const backendUrl = 'http://localhost:4000'
+export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
+>>>>>>> Stashed changes
 
 const App = () => {
   return (
     <div>
-      <ToastContainer />
       <Hero/>
       <Services/>
       <Menu/>

@@ -4,15 +4,15 @@ const adminAuth = async(req, res, next) => {
     try{
         const {token} = req.headers
         if(!token){
-            return res.json({success:false, message: "Unauthorized User"})
-        } 
-        const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-        if(token_decode !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD){
-            return res.json({success:false, message: "User is not authorized"})
+            return res.status(401).json({success:false, message: "Unauthorized: no token provided"})
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if(decoded.role !== 'admin'){
+            return res.status(401).json({success:false, message: "Unauthorized: insufficient permissions"})
         }
         next()
     }catch(error){
-        return res.json({success:false, message: error.message})
+        return res.status(401).json({success:false, message: "Unauthorized: invalid token"})
     }
 }
 

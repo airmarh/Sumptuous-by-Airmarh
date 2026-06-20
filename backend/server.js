@@ -6,6 +6,7 @@ import connectCloudinary from './config/cloudinary.js'
 import userRouter from './routes/userRoute.js'
 import productRouter from './routes/productRoutes.js'
 import reservationRouter from './routes/reservationRoutes.js'
+import { startReminderJob } from './jobs/reminderJob.js'
 
 const app = express()
 
@@ -15,6 +16,8 @@ connectCloudinary()
 
 app.use(cors())
 app.use(express.json())
+
+startReminderJob()
 
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)

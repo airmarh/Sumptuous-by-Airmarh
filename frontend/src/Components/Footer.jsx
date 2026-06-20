@@ -7,9 +7,9 @@ const Footer = () => {
       <div className='grid place-content-center gap-6 text-center'>
         <h2 className='text-4xl font-bold'>Need Update on Latest Offers?</h2>
         <p className='text-lg text-gray-400'>Subscribe to our newsletter to get frequent updates.</p>
-        <div className='flex items-center justify-center mac-w-xl mx-auto w-full'>
-          <input type="email" placeholder='Enter email address' className='grow px-4 py-3 border-2 border-r-0 border-amber-500 rounded-1-full outline-none text-sm'/>
-          <button className='bg-amber-500 text-white px-6 py-3 rounded r-full font-bold'>Join Now</button>
+        <div className='flex items-center justify-center max-w-xl mx-auto w-full'>
+          <input type="email" placeholder='Enter email address' className='grow px-4 py-3 border-2 border-r-0 border-amber-500 rounded-l-full outline-none text-sm'/>
+          <button className='bg-amber-500 text-white px-6 py-3 rounded-r-full font-bold'>Join Now</button>
         </div>
       </div>
       <div className='flex flex-col md:flex-row justify-between items-center md:text-left gap-6'>
@@ -24,14 +24,14 @@ const Footer = () => {
         </div>
         <div>
           <ul className='flex gap-6 justify-center text-base font-medium'>
-            <li>Home</li>
-            <li>Menu</li>
-            <li>About Us</li>
-            <li>Privacy Policy</li>
+            <li><a href='#home' className='hover:text-amber-500 transition'>Home</a></li>
+            <li><a href='#menu' className='hover:text-amber-500 transition'>Menu</a></li>
+            <li><a href='#about' className='hover:text-amber-500 transition'>About Us</a></li>
+            <li><a href='#contact' className='hover:text-amber-500 transition'>Contact</a></li>
           </ul>
         </div>
       </div>
-      <p className='text-center text-sm mt-4'>@ 2025 SUMPTUOUS BY AIRMARH. All rights reserved.</p>
+      <p className='text-center text-sm mt-4'>© {new Date().getFullYear()} SUMPTUOUS BY AIRMARH. All rights reserved.</p>
     </div>
   )
 }

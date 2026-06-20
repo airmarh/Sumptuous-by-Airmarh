@@ -79,7 +79,7 @@ const AddMenu = ({ token }) => {
           <p className="mb-2 font-medium text-gray-700">Product Image</p>
 
           <label htmlFor="image" className="flex h-40 w-40 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-sm text-gray-500 transition hover:border-amber-500 hover:text-amber-500">
-            <img src={ form.image ? form.image instanceof File ? URL.createObjectURL(form.image) : image : uploadImage } className="w-32 h-32 object-cover rounded-md border cursor-pointer" />
+            <img src={ form.image instanceof File ? URL.createObjectURL(form.image) : form.image || uploadImage } className="w-32 h-32 object-cover rounded-md border cursor-pointer" />
             <input type="file" id="image" hidden onChange={(e) => setForm({ ...form, image: e.target.files[0] })} />
           </label>
         </div>
