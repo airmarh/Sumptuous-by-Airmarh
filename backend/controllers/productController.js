@@ -14,12 +14,12 @@ export const addProduct = async(req, res) => {
         }
 
         const productRequest = {
-            name, description, category, 
-            price: Number(price), 
+            name, description, category,
+            price: Number(price),
             image: imageUrl,
             date: Date.now()
         }
-        
+
         const product = new productModel(productRequest)
         await product.save()
 
@@ -51,7 +51,6 @@ export const removeProduct = async(req, res) => {
         console.log(error)
         res.status(500).json({success:false, message: "Cannot remove product"})
     }
-    
 }
 
 export const getProduct = async(req, res) => {
@@ -65,8 +64,6 @@ export const getProduct = async(req, res) => {
         console.log(error)
         res.status(500).json({success:false, message: "Cannot get product information"})
     }
-<<<<<<< Updated upstream
-=======
 }
 
 export const updateProduct = async (req, res) => {
@@ -92,5 +89,4 @@ export const updateProduct = async (req, res) => {
         console.log(error)
         res.status(500).json({ success: false, message: "Cannot update product" })
     }
->>>>>>> Stashed changes
 }

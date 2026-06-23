@@ -59,8 +59,6 @@ export const createReservation = async(req, res) => {
     }
 }
 
-<<<<<<< Updated upstream
-=======
 export const updateReservation = async (req, res) => {
     try {
         const { name, email, phone, date, time, guests, status } = req.body
@@ -73,8 +71,7 @@ export const updateReservation = async (req, res) => {
         const updateData = { name, email, phone, date, time, guests }
         if (status) updateData.status = status
 
-        // If booking details changed and it's being cancelled, reset reminderSent
-        // so a rebooked slot would send a fresh reminder
+        // If booking details changed, reset reminderSent so a fresh reminder goes out
         const detailsChanged = date !== existing.date || time !== existing.time || Number(guests) !== existing.guests
         if (detailsChanged) updateData.reminderSent = false
 
@@ -100,7 +97,6 @@ export const updateReservation = async (req, res) => {
     }
 }
 
->>>>>>> Stashed changes
 export const getAllReservations = async(req, res) => {
     try{
         const reservations = await reservationModel.find({})
@@ -120,7 +116,6 @@ export const deleteReservation = async(req, res) => {
         console.log(error)
         res.status(500).json({success:false, message: "Cannot cancel reservation"})
     }
-    
 }
 
 export const getReservation = async(req, res) => {

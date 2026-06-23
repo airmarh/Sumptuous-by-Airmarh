@@ -1,13 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import {product} from "../assets/assets";
+import { backendUrl } from "../App";
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const MenuContext = createContext()
 
 const MenuContextProvider = ({children}) => {
-    const [products, setProducts] = useState(product) 
-<<<<<<< Updated upstream
-=======
-    
+    const [products, setProducts] = useState(product)
+
     const getProductData = async () => {
         try {
             const response = await axios.get(`${backendUrl}/api/product/getAll`)
@@ -26,7 +27,6 @@ const MenuContextProvider = ({children}) => {
         getProductData()
     },[])
 
->>>>>>> Stashed changes
     return(
         <MenuContext.Provider value={{products}}> {children} </MenuContext.Provider>
     )

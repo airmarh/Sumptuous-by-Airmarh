@@ -26,7 +26,6 @@ const Footer = () => {
           <ul className='flex gap-6 justify-center text-base font-medium'>
             <li><a href='#home' className='hover:text-amber-500 transition'>Home</a></li>
             <li><a href='#menu' className='hover:text-amber-500 transition'>Menu</a></li>
-            <li><a href='#about' className='hover:text-amber-500 transition'>About Us</a></li>
             <li><a href='#contact' className='hover:text-amber-500 transition'>Contact</a></li>
           </ul>
         </div>
